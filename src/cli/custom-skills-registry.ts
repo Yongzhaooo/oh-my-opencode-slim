@@ -45,7 +45,7 @@ export const CUSTOM_SKILLS: CustomSkill[] = [
   {
     name: 'verification-planning',
     description:
-      'Plan credible, proportionate evidence before non-trivial implementation',
+      'Find a verification path when existing checks cannot establish correctness',
     allowedAgents: ['orchestrator'],
     sourcePath: 'src/skills/verification-planning',
   },

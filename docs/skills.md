@@ -30,7 +30,7 @@ broader evidence only when the change's risk or uncertainty warrants it.
 | [`codemap`](#codemap) | Repository codemap generation | `orchestrator` |
 | [`clonedeps`](#clonedeps) | Local dependency source cloning | `orchestrator` |
 | [`deepwork`](#deepwork) | Heavy/complex coding sessions workflow | `orchestrator` |
-| [`verification-planning`](#verification-planning) | Design project-specific evidence before implementation | `orchestrator` |
+| [`verification-planning`](#verification-planning) | Find a verification path when existing checks are insufficient | `orchestrator` |
 | [`reflect`](#reflect) | Review repeated work and suggest reusable workflow improvements | `orchestrator` |
 | [`worktrees`](#worktrees) | Safe Git worktree lane management | `orchestrator` |
 | [`oh-my-opencode-slim`](#oh-my-opencode-slim) | Plugin configuration and self-improvement guidance | `orchestrator` |
@@ -146,34 +146,16 @@ Start it directly with:
 
 ## verification-planning
 
-**Design project-specific evidence before non-trivial implementation.**
+Use this orchestrator skill when existing checks do not provide a clear way to
+verify the requested behavior. Identify the uncertainty, choose the smallest
+useful check, and add only the support needed to run it. Compare alternatives
+only when the choice remains unclear.
 
-`verification-planning` is an orchestrator-only skill for planning how a
-non-trivial implementation, bug fix, refactor, multi-layer change, or externally
-visible behavior will be proven before work begins. It starts with the claim to
-establish, its uncertainty and failure modes, then generates evidence paths from
-the system's controllable inputs, state transitions, boundaries, artifacts,
-invariants, reversibility, and repeatability rather than defaulting to familiar
-methods.
-
-When the system cannot expose decisive truth clearly enough, the skill may add a
-verification affordance: the smallest temporary or durable capability that makes
-the relevant state controllable, observable, repeatable, and diagnosable for an
-agent. This lets the agent improve the system's legibility instead of accepting
-weak, indirect evidence.
-
-It selects the narrowest path by credibility, signal quality, cost, safety, and
-independent inspectability or repeatability. When relevant project facilities or
-constraints are unfamiliar or rapidly changing, it asks `@librarian` for focused
-official and project-specific research before deciding; it does not seek generic
-testing advice or research when current evidence is already decisive.
-
-**When NOT to use:** tiny mechanical edits. It complements ordinary verification
-and deepwork, does not prescribe a default mechanism, and requires approval for
-verification-only dependencies, persistent instrumentation, production debug
-surfaces, or structural changes. Temporary support is removed; durable support
-needs a clear justification. Completed work reports what was established and its
-limitations.
+When ordinary project checks or an available `test-verification` skill already
+cover the behavior, use them directly. Multiple files or non-trivial code alone
+do not trigger a separate verification plan. Required repository and release
+checks still apply. Reuse valid evidence and stop once the requested behavior is
+covered.
 
 ---
 

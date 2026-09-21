@@ -1,3 +1,7 @@
+> 个人 fork，基于上游 v2.2.18：边界清楚的任务直接完成，按实际收益委派；
+> 移除固定能力倍数，验证规划仅用于现有检查无法证明正确性的任务。
+> Council 和后台任务管理保留上游行为。部署与回滚见 [说明](docs/personal-fork.md)。
+
 <div align="center">
   <a href="https://github.com/alvinunreal/oh-my-opencode-slim/stargazers">
     <img src="img/v2.jpg" alt="oh-my-opencode-slim V2 Release" style="border-radius: 10px;">
@@ -136,7 +140,7 @@ bun run build
 > **建议**了解后台编排的工作原理。**[编排者提示词 (Orchestrator prompt)](https://github.com/alvinunreal/oh-my-opencode-slim/blob/master/src/agents/orchestrator.ts#L28)** 包含调度规则、专家路由逻辑，以及何时应把工作分配给后台智能体的阈值。您始终可以通过以下方式手动委派任务：`@智能体名称 <任务内容>`
 
 > [!TIP]
-> 由于后台智能体现在是默认工作流，**强烈建议**启用并配置 **[Multiplexer Integration](docs/multiplexer-integration.md)**。它会自动在专用的 Tmux、Zellij、Herdr 或 cmux 窗格中打开每个智能体，让您在 Orchestrator 继续协调会话时，实时跟进各个专家智能体的工作。
+> 对于有实际并行收益的任务，可以启用并配置 **[Multiplexer Integration](docs/multiplexer-integration.md)**。它会自动在专用的 Tmux、Zellij、Herdr 或 cmux 窗格中打开每个智能体，让您在 Orchestrator 继续协调会话时，实时跟进各个专家智能体的工作。
 
 默认生成的配置包含 `openai` 和 `opencode-go` 两个预设：
 
@@ -552,7 +556,7 @@ Skills 是注入智能体系统提示词的、基于提示词的指令，用于�
 |:-----:|------|------------|----------|
 | <img src="img/skills/codemap.webp" width="120" alt="Codemap artifact"><br>[`codemap`](src/skills/codemap/SKILL.md) | 分层仓库地图，让智能体无需反复阅读全部内容也能理解代码库 | `orchestrator` | `run codemap` |
 | <img src="img/skills/deepwork.webp" width="120" alt="Deepwork artifact"><br>[`deepwork`](src/skills/deepwork/SKILL.md) | 面向大型、高风险、多阶段编码会话的结构化工作流，包含审查关卡 | `orchestrator` | `/deepwork <task>` |
-| <img src="img/skills/verification-planning.webp" width="120" alt="Verification Planning artifact"><br>[`verification-planning`](src/skills/verification-planning/SKILL.md) | 在非平凡变更前规划项目特定的证据路径 | `orchestrator` | 非平凡工作前自动调用 |
+| <img src="img/skills/verification-planning.webp" width="120" alt="Verification Planning artifact"><br>[`verification-planning`](src/skills/verification-planning/SKILL.md) | 现有检查不足时寻找验证路径 | `orchestrator` | 验证路径不清楚时调用 |
 | <img src="img/skills/simplify.webp" width="120" alt="Simplify artifact"><br>[`simplify`](src/skills/simplify/SKILL.md) | 保持行为不变地简化代码，提升可读性和可维护性 | `oracle` | 请求简化或在审查期间调用 |
 | <img src="img/skills/worktrees.webp" width="120" alt="Worktrees artifact"><br>[`worktrees`](src/skills/worktrees/SKILL.md) | 将 Git worktree 用作安全、隔离的编码通道，适合高风险或并行工作 | `orchestrator` | `work in a worktree` |
 | <img src="img/skills/clonedeps.webp" width="120" alt="Clonedeps artifact"><br>[`clonedeps`](src/skills/clonedeps/SKILL.md) | 在本地克隆依赖源码，供智能体检查库内部实现 | `orchestrator` | `clone dependencies` |

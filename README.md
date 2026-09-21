@@ -1,3 +1,8 @@
+> Personal fork: based on upstream v2.2.18. Bounded tasks can run directly;
+> delegation requires a concrete benefit. Model ability multipliers are removed,
+> and verification planning is reserved for unclear evidence paths. Council and
+> background task management retain upstream behavior. See [deployment notes](docs/personal-fork.md).
+
 <div align="center">
   <a href="https://github.com/alvinunreal/oh-my-opencode-slim/stargazers">
     <img src="img/v2.jpg" alt="oh-my-opencode-slim V2 Release" style="border-radius: 10px;">
@@ -181,7 +186,7 @@ Then:
 > It's **recommended** to understand how background orchestration works. The **[Orchestrator prompt](https://github.com/alvinunreal/oh-my-opencode-slim/blob/master/src/agents/orchestrator.ts#L28)** contains the scheduler rules, specialist routing logic, and thresholds for when work should be assigned to background agents. You can always delegate manually by calling a subagent via: `@agentName <task>`
 
 > [!TIP]
-> Because background agents are now the default workflow, it is **highly recommended** to enable and configure **[Multiplexer Integration](docs/multiplexer-integration.md)**. It automatically opens each agent in a dedicated Tmux, Zellij, Herdr, cmux, or kitty pane, so you can watch specialists work live while the Orchestrator continues coordinating the session.
+> For substantial parallel work, you can enable and configure **[Multiplexer Integration](docs/multiplexer-integration.md)**. It automatically opens each agent in a dedicated Tmux, Zellij, Herdr, cmux, or kitty pane, so you can watch specialists work live while the Orchestrator continues coordinating the session.
 
 The default generated configuration includes both `openai` and `opencode-go` presets.
 
@@ -611,7 +616,7 @@ updated on plugin auto-update; local customizations are preserved.
 |:-----:|---------|---------------|---------------|
 | <img src="img/skills/codemap.webp" width="120" alt="Codemap artifact"><br>[`codemap`](src/skills/codemap/SKILL.md) | Hierarchical repository maps so agents understand codebases without re-reading everything | `orchestrator` | `run codemap` |
 | <img src="img/skills/deepwork.webp" width="120" alt="Deepwork artifact"><br>[`deepwork`](src/skills/deepwork/SKILL.md) | Structured workflow for large, risky, multi-phase coding sessions with review gates | `orchestrator` | `/deepwork <task>` |
-| <img src="img/skills/verification-planning.webp" width="120" alt="Verification Planning artifact"><br>[`verification-planning`](src/skills/verification-planning/SKILL.md) | Plans a project-specific evidence path before non-trivial changes | `orchestrator` | automatic before non-trivial work |
+| <img src="img/skills/verification-planning.webp" width="120" alt="Verification Planning artifact"><br>[`verification-planning`](src/skills/verification-planning/SKILL.md) | Finds a verification path when existing checks are insufficient | `orchestrator` | when the verification path is unclear |
 | <img src="img/skills/simplify.webp" width="120" alt="Simplify artifact"><br>[`simplify`](src/skills/simplify/SKILL.md) | Behavior-preserving simplification for readability and maintainability | `oracle` | ask for simplification or during review |
 | <img src="img/skills/worktrees.webp" width="120" alt="Worktrees artifact"><br>[`worktrees`](src/skills/worktrees/SKILL.md) | Git worktrees as safe, isolated coding lanes for risky or parallel work | `orchestrator` | `work in a worktree` |
 | <img src="img/skills/clonedeps.webp" width="120" alt="Clonedeps artifact"><br>[`clonedeps`](src/skills/clonedeps/SKILL.md) | Clones dependency source locally so agents can inspect library internals | `orchestrator` | `clone dependencies` |

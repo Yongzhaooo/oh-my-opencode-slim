@@ -21,7 +21,7 @@
 | `clonedeps/` | General-purpose | Workflow skill for dependency source mirroring and inspection |
 | `simplify/` | General-purpose | Readability and maintainability guidance skill |
 | `deepwork/` | Orchestrator-only | Heavy coding sessions, multi-phase implementation, and risky refactors |
-| `verification-planning/` | Orchestrator-only | Project-specific evidence planning and verification affordances before non-trivial implementation |
+| `verification-planning/` | Orchestrator-only | Verification planning when existing checks cannot establish correctness |
 | `reflect/` | Orchestrator-only | Learning from repeated work and suggesting reusable improvements |
 | `worktrees/` | Orchestrator-only | Safe Git worktree lanes for parallel, risky, or isolated work |
 | `oh-my-opencode-slim/` | Orchestrator-only | Plugin configuration and self-improvement guidance |

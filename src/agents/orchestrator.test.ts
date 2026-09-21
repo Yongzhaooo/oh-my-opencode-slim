@@ -2,6 +2,22 @@ import { describe, expect, test } from 'bun:test';
 import { buildOrchestratorPrompt } from './orchestrator';
 
 describe('orchestrator prompt', () => {
+  test('allows bounded direct work while retaining safe delegation', () => {
+    const prompt = buildOrchestratorPrompt();
+
+    expect(prompt).toContain('including related changes across a few files');
+    expect(prompt).toContain(
+      'small UI adjustments within an established design',
+    );
+    expect(prompt).toContain('benefit that outweighs the handoff cost');
+    expect(prompt).not.toContain('one isolated, clear, low-risk action');
+    expect(prompt).not.toContain('Never handle UI/design work directly');
+    expect(prompt).not.toMatch(/Stats:.*\d/);
+    expect(prompt).toContain('Every delegation names a validation owner');
+    expect(prompt).toContain('write scopes do not conflict');
+    expect(prompt).toContain('task_result');
+  });
+
   test('requires the question tool for blocking user input', () => {
     const prompt = buildOrchestratorPrompt();
 
