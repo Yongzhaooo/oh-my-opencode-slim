@@ -9,13 +9,48 @@ describe('orchestrator prompt', () => {
     expect(prompt).toContain(
       'small UI adjustments within an established design',
     );
-    expect(prompt).toContain('benefit that outweighs the handoff cost');
+    expect(prompt).toContain('benefit outweighs the handoff cost');
     expect(prompt).not.toContain('one isolated, clear, low-risk action');
     expect(prompt).not.toContain('Never handle UI/design work directly');
     expect(prompt).not.toMatch(/Stats:.*\d/);
     expect(prompt).toContain('Every delegation names a validation owner');
     expect(prompt).toContain('write scopes do not conflict');
     expect(prompt).toContain('task_result');
+  });
+
+  test('keeps direct work from absorbing every lane', () => {
+    const prompt = buildOrchestratorPrompt();
+
+    expect(prompt).toContain(
+      'Do not keep substantive work entirely in the orchestrator merely because each individual step seems easy',
+    );
+    expect(prompt).toContain('you own the routing decision');
+  });
+
+  test('states observable delegation triggers for each specialist lane', () => {
+    const prompt = buildOrchestratorPrompt();
+
+    expect(prompt).toContain('Delegate on these observable conditions');
+    expect(prompt).toContain(
+      'Two or more parts can start now with non-conflicting write scopes',
+    );
+    expect(prompt).toContain('do not yet know which files are in scope');
+    expect(prompt).toContain("external library's current API");
+    expect(prompt).toContain('survived two fix attempts');
+    expect(prompt).toContain('needs visual judgment');
+    expect(prompt).toContain('can run in its own lane while you continue');
+  });
+
+  test('keeps council out of generic delegation requests', () => {
+    const prompt = buildOrchestratorPrompt();
+
+    expect(prompt).toContain(
+      'never answer a generic delegation request with @council',
+    );
+    expect(prompt).toContain('the most expensive and slowest lane available');
+    expect(prompt).toContain(
+      'There is no specific decision for the council to resolve',
+    );
   });
 
   test('requires the question tool for blocking user input', () => {
